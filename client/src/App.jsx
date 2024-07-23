@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {Header} from "./components/components.exporter.js";
 import {
   About,
   Dashboard,
@@ -13,6 +13,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Header/>
         <Routes>
           <Route path="/" element={<Home />}  />
           <Route path="/about" element={<About />}  />
