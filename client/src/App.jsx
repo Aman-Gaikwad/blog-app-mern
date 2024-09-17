@@ -1,4 +1,4 @@
-import {Header} from "./components/components.exporter.js";
+import {Header, Footer} from "./components/components.exporter.js";
 import {
   About,
   Dashboard,
@@ -22,6 +22,7 @@ function App() {
           <Route path="/signin" element={<Signin />}  />
           <Route path="/signup" element={<Signup />}  />
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </>
   );
