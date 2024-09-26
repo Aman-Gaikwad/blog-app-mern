@@ -1,9 +1,9 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react';
 import { Link,  useNavigate } from "react-router-dom";
-import { FaGoogle } from "react-icons/fa6";
 import { useState } from "react";
 import { useSelector, useDispatch} from 'react-redux';
 import { signInStart,signInSuccess,signInFailure } from '../redux/user/userSlice.js';
+import {OAuth} from '../components/components.exporter.js';
 
 export default function Signin() {
   const [formData, setFormData] = useState({});
@@ -109,10 +109,8 @@ export default function Signin() {
             </form>
 
             <div className="flex flex-col gap-4 mt-2">
-              <Button gradientDuoTone="redToYellow" outline>
-                <FaGoogle className="mr-2 h-5 w-5" />
-                Continue with Google
-              </Button>
+              
+              <OAuth/>
             </div>
 
             <div className="flex gap-2 text-sm mt-5">
@@ -120,6 +118,7 @@ export default function Signin() {
               <Link to="/signup" className="text-blue-500">
                 Sign Up
               </Link>
+              
             </div>
             {
               errorMessage && (
