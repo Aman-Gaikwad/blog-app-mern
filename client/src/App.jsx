@@ -1,4 +1,4 @@
-import {Header, Footer} from "./components/components.exporter.js";
+import { Header, Footer, PrivateRoute } from "./components/components.exporter.js";
 import {
   About,
   Dashboard,
@@ -17,7 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}  />
           <Route path="/about" element={<About />}  />
-          <Route path="/dashboard" element={<Dashboard />}  />
+          <Route element={<PrivateRoute/>} >
+            <Route path="/dashboard" element={<Dashboard />}  />
+          </Route>
           <Route path="/projects" element={<Projects />}  />
           <Route path="/signin" element={<Signin />}  />
           <Route path="/signup" element={<Signup />}  />
