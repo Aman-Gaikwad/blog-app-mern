@@ -1,4 +1,4 @@
-import { Header, Footer, PrivateRoute } from "./components/components.exporter.js";
+import { Header, Footer, PrivateRoute, AdminPrivateRoute } from "./components/components.exporter.js";
 import {
   About,
   Dashboard,
@@ -6,6 +6,7 @@ import {
   Projects,
   Signin,
   Signup,
+  CreatePost,
 } from "./pages/pages.exporter.js";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
@@ -19,6 +20,9 @@ function App() {
           <Route path="/about" element={<About />}  />
           <Route element={<PrivateRoute/>} >
             <Route path="/dashboard" element={<Dashboard />}  />
+          </Route>
+          <Route element={<AdminPrivateRoute/>} >
+            <Route path="/createpost" element={<CreatePost/>} />
           </Route>
           <Route path="/projects" element={<Projects />}  />
           <Route path="/signin" element={<Signin />}  />

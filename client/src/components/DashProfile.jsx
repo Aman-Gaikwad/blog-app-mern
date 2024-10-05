@@ -23,7 +23,7 @@ import {
 } from "../redux/user/userSlice.js";
 
 export default function DashProfile() {
-  const { currentUser, error } = useSelector((state) => state.user);
+  const { currentUser, error, loading } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileURL, setImageFileURL] = useState(null);
   const filePickerRef = useRef();
@@ -263,9 +263,21 @@ export default function DashProfile() {
             placeholder="password"
             onChange={handleChange}
           />
-          <Button type="submit" gradientDuoTone="purpleToBlue" outline>
-            Update
+          <Button 
+            type="submit" 
+            gradientDuoTone="purpleToBlue" 
+            outline
+            disabled={loading || imageFileUploading}
+          >
+            {loading ? 'Loading...' : 'Update'}
           </Button>
+          {currentUser.isAdmin && (
+            <Link to={'/createpost'} >
+              <Button type="button" gradientDuoTone='redToYellow' className="w-full" >
+                Create a Post
+              </Button>
+            </Link>
+          )}
         </form>
         <div className="text-red-500 flex justify-between mt-5">
           <span onClick={() => setShowModal(true)} className="cursor-pointer">
