@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { app } from "../firebase.config";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
   const [formData, setFormData] = useState({});
@@ -12,7 +13,8 @@ export default function CreatePost() {
 
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
-  
+  const [publishError, setPublishError] =useState(null);
+  const navigate = useNavigate();
   const MAX_FILE_SIZE = 2 * 1024 * 1024;
   const validImageFileTypes = [
     "image/jpeg",
@@ -84,13 +86,36 @@ export default function CreatePost() {
     );
   };
 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch('/api/post/createpost',{
+        method:'POST',
+        headers :{
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(formData),
+      });
+      const data = await res.json();
+      if(!res.ok){
+        setPublishError(data.message);
+      } else{
+        setPublishError(null);
+        navigate(`/post${data.slug}`);
+      }
+    } catch (error) {
+      setPublishError("Something went wrong", error);
+    }
+  }
+
   return (
     <>
       <div className="p-3 max-w-3xl mx-auto min-h-screen">
         <h1 className="text-center text-3xl my-7 font-semibold">
           Create a post
         </h1>
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4 sm:flex-row justify-between">
             <TextInput
               type="text"
@@ -167,6 +192,11 @@ export default function CreatePost() {
           <Button type="submit" gradientDuoTone="purpleToPink" disabled={imageFileUploading || imageFileUploadError}>
             Publish
           </Button>
+          {publishError && (
+            <Alert className='mt-5' color='failure'>
+              {publishError}
+            </Alert>
+          )}
         </form>
       </div>
     </>
