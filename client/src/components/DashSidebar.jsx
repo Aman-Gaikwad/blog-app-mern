@@ -35,7 +35,7 @@ export default function DashSidebar() {
         if(!res.ok){
           console.log(data.message);
         } else{
-          dispatch(signoutSuccess);
+          dispatch(signoutSuccess());
         }
       } catch (error) {
         console.log(error.message);
@@ -48,10 +48,23 @@ export default function DashSidebar() {
         <Sidebar.Items>
           <Sidebar.ItemGroup className="flex flex-col gap-1">
             <Link to='/dashboard?tab=profile' >
-                <Sidebar.Item  active={tab === 'profile'} icon={HiUser} label={'User'} labelColor='dark' as='div' >
+                <Sidebar.Item  
+                  active={tab === 'profile'} 
+                  icon={HiUser} 
+                  label={currentUser.isAdmin ? "Admin" : "User"} 
+                  labelColor='dark' as='div' 
+                >
                     Profile
                 </Sidebar.Item>
             </Link>
+
+            {currentUser.isAdmin &&
+              <Link to='/dashboard?tab=posts'>
+                  <Sidebar.Item active={tab === 'posts'} icon={HiDocumentText} as='div'>
+                    Posts
+                  </Sidebar.Item>
+            </Link>
+            }
             <Sidebar.Item onClick={handleSignout} icon={HiArrowSmRight} className='cursor-pointer'>
                 Sign Out
             </Sidebar.Item>
