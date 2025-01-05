@@ -12,6 +12,7 @@ import ScrollToTop from "./ScrollToTop.jsx";
 import CommentSection from "./CommentSection.jsx";
 import Comment from "./Comment.jsx";
 import PostCard from "./PostCard.jsx";
+import DashComments from "./DashComments.jsx";
+import DashboardComp from "./DashboardComp.jsx";
 
-
-export {Header,Footer,OAuth, PrivateRoute, DashSidebar, DashProfile, DashPosts, AdminPrivateRoute, DashUsers, CallToAction,ScrollToTop, CommentSection,Comment, PostCard};
+export {Header,Footer,OAuth, PrivateRoute, DashSidebar, DashProfile, DashPosts, AdminPrivateRoute, DashUsers, CallToAction,ScrollToTop, CommentSection,Comment, PostCard, DashComments,DashboardComp};
