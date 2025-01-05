@@ -7,7 +7,8 @@ import {
   Signin,
   Signup,
   CreatePost,
-  UpdatePost
+  UpdatePost,
+  PostPage
 } from "./pages/pages.exporter.js";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/updatepost/:postID" element={<UpdatePost />} />
           </Route>
           <Route path="/projects" element={<Projects />}  />
+          <Route path='/post/:postSlug' element={<PostPage />} />
           <Route path="/signin" element={<Signin />}  />
           <Route path="/signup" element={<Signup />}  />
         </Routes>
