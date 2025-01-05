@@ -7,5 +7,6 @@ import DashProfile from "./DashProfile.jsx"
 import DashPosts from "./DashPosts.jsx";
 import AdminPrivateRoute from "./AdminPrivateRoute.jsx";
 import DashUsers from "./DashUsers.jsx";
+import CallToAction from "./CallToAction.jsx";
 
-export {Header,Footer,OAuth, PrivateRoute, DashSidebar, DashProfile, DashPosts, AdminPrivateRoute, DashUsers};
+export {Header,Footer,OAuth, PrivateRoute, DashSidebar, DashProfile, DashPosts, AdminPrivateRoute, DashUsers, CallToAction};
