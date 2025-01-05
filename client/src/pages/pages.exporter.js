@@ -5,6 +5,7 @@ import Projects from './Projects.jsx'
 import Signin from './Signin.jsx'
 import Signup from './Signup.jsx'
 import CreatePost from './CreatePost.jsx'
+import UpdatePost from './UpdatePost.jsx'
 
 
-export {About,Dashboard,Home,Projects,Signin,Signup, CreatePost};
+export {About,Dashboard,Home,Projects,Signin,Signup, CreatePost, UpdatePost};

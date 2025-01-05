@@ -34,7 +34,7 @@ export const getPosts = async (req, res,next) =>{
             ...(req.query.userID && {userID : req.query.userID}),
             ...(req.query.category && { category : req.query.category }),
             ...(req.query.slug && { slug : req.query.slug }),
-            ...(req.query.postID && { postID : req.query.postID }),
+            ...(req.query.postID && { _id : req.query.postID }),
             ...(req.query.searchTerm && {
                 $or: [
                     { title : {$regex: req.query.searchTerm, $options: 'i'} },
@@ -76,4 +76,30 @@ export const deletepost = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  };
+};
+
+export const updatepost = async (req, res, next) => {
+    if (!req.user.isAdmin || req.user.id !== req.params.userId) {
+      return next(errorHandler(403, 'You are not allowed to update this post'));
+    }
+    try {
+      
+      
+      const updatedPost = await Post.findByIdAndUpdate(
+        {_id : req.params.postID},
+        {
+          $set: {
+            title: req.body.title,
+            content: req.body.content,
+            category: req.body.category,
+            image: req.body.image,
+          },
+        },
+        { new: true }
+      );
+      
+      res.status(200).json(updatedPost);
+    } catch (error) {
+      next(error);
+    }
+};
