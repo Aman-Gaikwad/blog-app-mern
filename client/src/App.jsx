@@ -1,4 +1,4 @@
-import { Header, Footer, PrivateRoute, AdminPrivateRoute } from "./components/components.exporter.js";
+import { Header, Footer, PrivateRoute, AdminPrivateRoute, ScrollToTop } from "./components/components.exporter.js";
 import {
   About,
   Dashboard,
@@ -16,6 +16,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop/>
         <Header/>
         <Routes>
           <Route path="/" element={<Home />}  />
