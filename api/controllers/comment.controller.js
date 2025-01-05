@@ -3,8 +3,8 @@ import Comment from '../models/comment.model.js';
 export const createComment = async (req, res, next) => {
   try {
     const { content, postId, userId } = req.body;
-
-    if (userId !== req.user.id) {
+    
+    if (userId !== req.user.userID) {
       return next(
         errorHandler(403, 'You are not allowed to create this comment')
       );
@@ -40,10 +40,10 @@ export const likeComment = async (req, res, next) => {
     if (!comment) {
       return next(errorHandler(404, 'Comment not found'));
     }
-    const userIndex = comment.likes.indexOf(req.user.id);
+    const userIndex = comment.likes.indexOf(req.user.userID);
     if (userIndex === -1) {
       comment.numberOfLikes += 1;
-      comment.likes.push(req.user.id);
+      comment.likes.push(req.user.userID);
     } else {
       comment.numberOfLikes -= 1;
       comment.likes.splice(userIndex, 1);
@@ -61,7 +61,7 @@ export const editComment = async (req, res, next) => {
     if (!comment) {
       return next(errorHandler(404, 'Comment not found'));
     }
-    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+    if (comment.userId !== req.user.userID && !req.user.isAdmin) {
       return next(
         errorHandler(403, 'You are not allowed to edit this comment')
       );
@@ -86,7 +86,7 @@ export const deleteComment = async (req, res, next) => {
     if (!comment) {
       return next(errorHandler(404, 'Comment not found'));
     }
-    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+    if (comment.userId !== req.user.userID && !req.user.isAdmin) {
       return next(
         errorHandler(403, 'You are not allowed to delete this comment')
       );
