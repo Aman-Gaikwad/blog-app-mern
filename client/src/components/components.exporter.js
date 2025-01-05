@@ -10,6 +10,8 @@ import DashUsers from "./DashUsers.jsx";
 import CallToAction from "./CallToAction.jsx";
 import ScrollToTop from "./ScrollToTop.jsx";
 import CommentSection from "./CommentSection.jsx";
+import Comment from "./Comment.jsx";
+import PostCard from "./PostCard.jsx";
 
 
-export {Header,Footer,OAuth, PrivateRoute, DashSidebar, DashProfile, DashPosts, AdminPrivateRoute, DashUsers, CallToAction,ScrollToTop, CommentSection};
+export {Header,Footer,OAuth, PrivateRoute, DashSidebar, DashProfile, DashPosts, AdminPrivateRoute, DashUsers, CallToAction,ScrollToTop, CommentSection,Comment, PostCard};
