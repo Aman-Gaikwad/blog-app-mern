@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { userRoutes, authRoutes, postRoutes, commentRoutes } from './routes/route.exporter.js'
+import path from 'path'
 
 
 dotenv.config();
@@ -18,6 +19,8 @@ mongoose.connect(process.env.MONGO_DB_URL)
     console.log(err)
 ]);
 
+const __dirname = path.resolve();
+
 
 
 app.listen(3000, () => { console.log("server is listening at port "); });
@@ -26,6 +29,13 @@ app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/comment', commentRoutes);
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
 
 app.use((err,req,res,next)=>{
         const statusCode = err.statusCode || 500;
